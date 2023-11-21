@@ -1,6 +1,13 @@
+import { Provider } from "react-redux";
+
+import { GameGrid } from "./components";
+import store from "./store";
+
 function App () {
 	return (
-		<h1>TikTakToe</h1>
+		<Provider store={store}>
+			<GameGrid/>
+		</Provider>
 	)
 }
 
