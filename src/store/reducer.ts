@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getTimeMeasureUtils } from "@reduxjs/toolkit/dist/utils";
+
 
 const Slice = createSlice({
     name: 'gameVector',
@@ -27,7 +27,7 @@ const Slice = createSlice({
                 console.log(nextElementSimbling);
                 nextElementSimbling = (<HTMLElement>nextElementSimbling?.nextElementSibling);
                 simblingsAfterClickedCell++;
-            } while (nextElementSimbling !== null);
+            } while (nextElementSimbling);
             const position = (9 - simblingsAfterClickedCell);
             console.log(position);
             if (gameVector[position] === ' ') {
@@ -43,9 +43,12 @@ const Slice = createSlice({
             let victoryCondition4: boolean = false;
             for (let i = 0; i < 9; i++) {
                 victoryCondition1 = (gameVector[i] !== ' ') && (gameVector[i] === gameVector[i + 1]) && (gameVector[i + 1] === gameVector[i + 2]);
-                victoryCondition2 = (gameVector[0] !== ' ') && (gameVector[i] === gameVector[i + 3]) && (gameVector[i + 3] === gameVector[i + 6]);
-                if (victoryCondition1 || victoryCondition2) break;
-                i += 3;
+                if (victoryCondition1) break;
+                i = i + 2;
+            }
+            for (let i = 0; i < 3; i++) {
+                victoryCondition2 = (gameVector[i] !== ' ') && (gameVector[i] === gameVector[i + 3]) && (gameVector[i + 3] === gameVector[i + 6]);
+                if (victoryCondition2) break;
             }
             victoryCondition3 = (gameVector[0] !== ' ') && (gameVector[0] === gameVector[4]) && (gameVector[4] === gameVector[8])
             if (gameVector[2] !== ' ') {
@@ -69,7 +72,7 @@ const Slice = createSlice({
             else if (state.currentPlayer === 'O') state.currentPlayer = 'X';
         }
     }
-})
+});
 
 export const { defineInitialPlayer, play } = Slice.actions;
 export default Slice.reducer;
