@@ -12,5 +12,4 @@ const wrapperStyle = {
     justifyContent: 'center',
     width: '100vw',
     height: '100vh',
-    backgroundColor: 'rgba(0,0,0,0.95)'
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { Cell } from '../Cell';
 import store from '../../store';
@@ -9,7 +9,7 @@ export function GameGrid() {
 
 
     return (
-        <div style={gameGridStyle} onClick={() => {
+        <div id={'game-grid'} style={gameGridStyle} onClick={() => {
             gameVectorStore = store.getState().gameVector;
             setGameVector(gameVectorStore)
             console.log('Game Vector: ' + gameVectorStore);
@@ -27,10 +27,10 @@ export function GameGrid() {
 }
 
 const gameGridStyle = {
-    display: 'grid',
+    display: 'none',
     gridTemplateColumns: 'repeat(3, 1fr)',
     gridTemplateRows: 'repeat(3, 1fr)',
     gap: '5px',
     width: '500px',
-    height: '500px'
+    height: '500px',
 }

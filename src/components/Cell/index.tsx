@@ -13,7 +13,7 @@ export function Cell ({ children }) {
 
 const cellStyle = {
     fontSize: '100px',
-    backgroundColor: '#FFF',
     color: '#000',
-    textAlign: 'center'
+    textAlign: 'center',
+    border: '1px solid #000'
 }

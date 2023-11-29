@@ -10,8 +10,16 @@ const Slice = createSlice({
         freePositions: 9
     },
     reducers: {
-        defineInitialPlayer (state, { payload }): void {
-            state.currentPlayer = payload.initialPlayer;
+        defineInitialPlayer (state): void {
+            const chooseSymbolContainer: HTMLElement = (<HTMLElement>document.querySelector('#choose-symbol-contiainer'));
+            const gameGrid: HTMLElement = (<HTMLElement>document.querySelector('#game-grid'));
+            console.log(gameGrid);
+            const symbolButton: HTMLElement = (<HTMLElement>event?.target);
+            const initialSymbol = symbolButton.innerText;
+            console.log(initialSymbol);
+            state.currentPlayer = initialSymbol;
+            chooseSymbolContainer.remove();
+            gameGrid.style.setProperty('display', 'grid');
         },
         play (state): void {
             if (state.gameStatus === 'Vitória de X' || state.gameStatus === 'Vitória de O') return;
