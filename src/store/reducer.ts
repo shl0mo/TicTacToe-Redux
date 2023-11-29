@@ -23,11 +23,10 @@ const Slice = createSlice({
         },
         play (state): void {
             if (state.gameStatus === 'Vitória de X' || state.gameStatus === 'Vitória de O') return;
-            console.log('Play');
             const gameVector: string[] = state.gameVector;
             const clickedCell: HTMLElement = (<HTMLElement>event?.target);
             let currentCell: HTMLElement = (<HTMLElement>clickedCell);
-            console.log(currentCell.nextElementSibling);
+            const finalStatusContainer: HTMLElement = (<HTMLElement>document.querySelector('#final-status'));
             let nextElementSimbling = (<HTMLElement>currentCell.nextElementSibling);
             let simblingsAfterClickedCell: number = 0;
             if (nextElementSimbling !== null) simblingsAfterClickedCell++;
@@ -63,17 +62,15 @@ const Slice = createSlice({
                 victoryCondition4 = (gameVector[2] === gameVector[4]) && (gameVector[4] === gameVector[6]);
             }
             if (victoryCondition1 || victoryCondition2 || victoryCondition3 || victoryCondition4) {
-                console.log('Caso 1:' + victoryCondition1);
-                console.log('Caso 2:' + victoryCondition2);
-                console.log('Caso 3:' + victoryCondition3);
-                console.log('Caso 4:' + victoryCondition4);
-                alert(`Fim de jogo ${state.currentPlayer} venceu`);
-                console.log(state.gameVector[1]);
                 state.gameStatus = `Vitória de ${state.currentPlayer}`;
+                finalStatusContainer.innerText = state.gameStatus;
+                finalStatusContainer.style.setProperty('display', 'flex');
                 return;
             }
             if (state.freePositions === 0) {
-                alert('Jogo empatado');
+                state.gameStatus = `Empatado`;
+                finalStatusContainer.innerText = state.gameStatus;
+                finalStatusContainer.style.setProperty('display', 'flex');
                 return;
             }
             if (state.currentPlayer === 'X') state.currentPlayer = 'O';
